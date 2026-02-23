@@ -4,12 +4,12 @@
   <title>Arpit Tech | Web Developer Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<meta name="description" content="Arpit Tech portfolio website. Frontend developer skilled in HTML, CSS, and JavaScript.">
+
 <meta name="keywords" content="Arpit Tech, Arpit portfolio, Web Developer Arpit, Frontend Developer">
 <meta name="author" content="Arpit Tech">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arpit Maurya — Freelance Web Developer</title>
+
   <!-- SEO Meta Description -->
   <meta name="description" content="Arpit Maurya is a freelance web developer specializing in static and dynamic websites. Clean design, responsive layouts, and affordable web solutions for businesses and startups in Lucknow, India.">
   <!-- Google Fonts (Poppins) + Inter fallback -->
@@ -56,6 +56,7 @@
 
     .container {
       max-width: 1200px;
+      width:100%;
       margin: 0 auto;
       padding: 0 24px;
     }
@@ -560,6 +561,93 @@
         text-align: center;
       }
     }
+    /* ===== EXTRA MOBILE OPTIMIZATION ===== */
+
+@media (max-width: 768px) {
+
+  section {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  /* HERO FIX */
+  .hero {
+    min-height: auto;
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2.3rem;
+    line-height: 1.3;
+  }
+
+  .hero .subhead {
+    font-size: 1.1rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero-btns {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  /* NAV FIX */
+  .nav-container {
+    padding: 0 15px;
+  }
+
+  /* ABOUT FIX */
+  .about-grid {
+    gap: 30px;
+    text-align: center;
+  }
+
+  .highlights {
+    grid-template-columns: 1fr;
+  }
+
+  /* SERVICES FIX */
+  .services-grid {
+    gap: 20px;
+  }
+
+  /* PROJECT FIX */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* WHY SECTION FIX */
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* CONTACT FIX */
+  .contact-grid {
+    padding: 25px;
+  }
+
+  .contact-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+}
   </style>
 </head>
 <body>
@@ -594,7 +682,7 @@
   </section>
 
   <!-- ABOUT SECTION (with circular photo) -->
-  <section id="about" class="container fade-section">
+  <section id="about" class="container fade-section"><br><br>
     <h2 class="section-title">About <span>Me</span></h2>
     <div class="about-grid">
       <div class="about-text">
@@ -615,7 +703,7 @@
   </section>
 
   <!-- SERVICES SECTION -->
-  <section id="services" class="container fade-section">
+  <section id="services" class="container fade-section"><br> <br>
     <h2 class="section-title">My <span>Services</span></h2>
     <div class="services-grid">
       <div class="service-card"><i class="fas fa-code"></i><h3>Static Website</h3><p>Clean, fast-loading sites using HTML, CSS, Bootstrap for businesses & portfolios.</p></div>
@@ -627,20 +715,20 @@
   </section>
 
   <!-- SKILLS SECTION -->
-  <section id="skills" class="container fade-section">
+  <section id="skills" class="container fade-section"><br><br>
     <h2 class="section-title">Technical <span>Skills</span></h2>
     <div class="skills-container">
       <div class="skill-item"><div class="skill-info"><span>HTML</span><span>90%</span></div><div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div></div>
       <div class="skill-item"><div class="skill-info"><span>CSS</span><span>85%</span></div><div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div></div>
       <div class="skill-item"><div class="skill-info"><span>JavaScript</span><span>70%</span></div><div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div></div>
-      <div class="skill-item"><div class="skill-info"><span>PHP (Basic)</span><span>65%</span></div><div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div></div>
+      <div class="skill-item"><div class="skill-info"><span>Python(Basic)</span><span>65%</span></div><div class="progress-bar"><div class="progress-fill" style="width:65%"></div></div></div>
       <div class="skill-item"><div class="skill-info"><span>MySQL</span><span>60%</span></div><div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div></div>
       <div class="skill-item"><div class="skill-info"><span>Git & GitHub</span><span>70%</span></div><div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div></div>
     </div>
   </section>
 
   <!-- PROJECTS SECTION -->
-  <section id="projects" class="container fade-section">
+  <section id="projects" class="container fade-section"><br><br>
     <h2 class="section-title">My <span>Projects</span></h2>
     <div class="projects-grid">
       <div class="project-card"><div class="project-img" style="background:#9bbdf0;"><i class="fas fa-building fa-4x"></i></div><div class="project-info"><h3>Business Website (Static)</h3><p>Modern static site for local company with services, contact form & responsive layout.</p><div class="project-links"><a href="#">Live Demo</a><a href="#">View Code</a></div></div></div>
@@ -650,7 +738,7 @@
   </section>
 
   <!-- WHY CHOOSE ME -->
-  <section id="why" class="container fade-section">
+  <section id="why" class="container fade-section"><br><br>
     <h2 class="section-title">Why <span>Choose Me?</span></h2>
     <div class="why-grid">
       <div class="why-item"><i class="fas fa-wallet"></i><div><h4>Affordable Pricing</h4><p>High-quality websites at budget-friendly rates.</p></div></div>
@@ -661,7 +749,7 @@
   </section>
 
   <!-- CONTACT SECTION -->
-  <section id="contact" class="container fade-section">
+  <section id="contact" class="container fade-section"><br><br>
     <h2 class="section-title">Contact <span>Me</span></h2>
     <div class="contact-grid">
       <div>
@@ -760,6 +848,3 @@
   </script>
 </body>
 </html>
-
-
-
