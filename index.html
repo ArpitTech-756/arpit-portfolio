@@ -3,20 +3,14 @@
 <head>
   <title>Arpit Tech | Web Developer Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
-<meta name="keywords" content="Arpit Tech, Arpit portfolio, Web Developer Arpit, Frontend Developer">
-<meta name="author" content="Arpit Tech">
+  <meta name="keywords" content="Arpit Tech, Arpit portfolio, Web Developer Arpit, Frontend Developer">
+  <meta name="author" content="Arpit Tech">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- SEO Meta Description -->
   <meta name="description" content="Arpit Maurya is a freelance web developer specializing in static and dynamic websites. Clean design, responsive layouts, and affordable web solutions for businesses and startups in Lucknow, India.">
-  <!-- Google Fonts (Poppins) + Inter fallback -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* ----- RESET & VARIABLES ----- */
@@ -28,19 +22,19 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 80px; /* sticky navbar height */
+      scroll-padding-top: 80px;
     }
 
     body {
       font-family: 'Inter', 'Poppins', sans-serif;
-      background-color: #f9fcff;  /* soft blue-white */
+      background-color: #f9fcff;
       color: #1e293b;
       line-height: 1.6;
       overflow-x: hidden;
     }
 
     :root {
-      --primary: #2563eb;       /* vibrant blue */
+      --primary: #2563eb;
       --primary-dark: #1d4ed8;
       --primary-soft: #dbeafe;
       --dark: #0f172a;
@@ -61,7 +55,6 @@
       padding: 0 24px;
     }
 
-    /* ----- REUSABLE SECTION STYLES ----- */
     section {
       padding: 90px 0;
     }
@@ -78,7 +71,6 @@
       color: var(--primary);
     }
 
-    /* fade on scroll (initial hidden) */
     .fade-section {
       opacity: 0;
       transform: translateY(25px);
@@ -89,7 +81,6 @@
       transform: translateY(0);
     }
 
-    /* buttons */
     .btn {
       display: inline-block;
       padding: 14px 34px;
@@ -122,7 +113,7 @@
       transform: translateY(-4px);
     }
 
-    /* sticky navbar */
+    /* ===== FIXED NAVBAR - FULL CLICKABLE AREA ===== */
     .navbar {
       position: sticky;
       top: 0;
@@ -152,16 +143,33 @@
       gap: 36px;
       list-style: none;
     }
+    
+    /* CRITICAL FIX: Make entire li area clickable */
+    .nav-menu li {
+      display: flex;           /* Makes li a flex container */
+      margin: 0;               /* Remove any default margins */
+      padding: 0;              /* Remove any default padding */
+    }
+    
     .nav-menu a {
       text-decoration: none;
       font-weight: 500;
       color: var(--gray);
       transition: var(--transition);
       font-size: 1.05rem;
+      display: flex;           /* Change from block to flex */
+      align-items: center;     /* Center text vertically */
+      justify-content: center; /* Center text horizontally */
+      padding: 12px 20px;      /* Keep your padding */
+      width: 100%;             /* Take full width of parent li */
+      height: 100%;            /* Take full height of parent li */
+      text-align: center;
     }
+    
     .nav-menu a:hover {
       color: var(--primary);
     }
+    
     .hamburger {
       display: none;
       font-size: 28px;
@@ -169,7 +177,7 @@
       color: var(--dark);
     }
 
-    /* hero */
+    /* hero, about, services, etc. - same as before */
     .hero {
       min-height: 90vh;
       display: flex;
@@ -206,7 +214,6 @@
       flex-wrap: wrap;
     }
 
-    /* about */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 0.9fr;
@@ -233,7 +240,6 @@
       font-size: 1.6rem;
       width: 40px;
     }
-    /* circular photo */
     .about-photo {
       width: 100%;
       max-width: 320px;
@@ -253,7 +259,6 @@
       display: block;
     }
 
-    /* services cards */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -287,7 +292,6 @@
       color: var(--gray);
     }
 
-    /* skills bars */
     .skills-container {
       max-width: 850px;
       margin: 40px auto 0;
@@ -312,10 +316,9 @@
       height: 12px;
       background: linear-gradient(90deg, var(--primary), #3b82f6);
       border-radius: 30px;
-      width: 0%; /* set via inline style */
+      width: 0%;
     }
 
-    /* projects */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -369,7 +372,6 @@
       color: var(--primary);
     }
 
-    /* why choose me */
     .why-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -394,7 +396,6 @@
       color: var(--gray);
     }
 
-    /* contact */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -462,7 +463,6 @@
       transform: translateY(-4px);
     }
 
-    /* footer */
     .footer {
       background: var(--dark);
       color: #cbd5e1;
@@ -489,7 +489,6 @@
       margin-left: 15px;
     }
 
-    /* scroll-to-top */
     .scroll-top {
       position: fixed;
       bottom: 30px;
@@ -520,7 +519,7 @@
       transform: scale(1.1);
     }
 
-    /* mobile menu */
+    /* Mobile menu styles with full clickable area */
     @media (max-width: 900px) {
       .nav-menu {
         position: fixed;
@@ -529,29 +528,49 @@
         background: var(--white);
         width: 100%;
         flex-direction: column;
-        align-items: center;
-        padding: 40px 0;
-        gap: 25px;
+        align-items: stretch;    /* Changed from center to stretch */
+        padding: 0;              /* Remove padding */
+        gap: 0;                  /* Remove gap */
         box-shadow: 0 20px 30px rgba(0,0,0,0.1);
         transition: left 0.3s ease;
         backdrop-filter: blur(10px);
       }
+      
       .nav-menu.active {
         left: 0;
       }
+      
+      /* Mobile menu items - full width clickable */
+      .nav-menu li {
+        width: 100%;
+        margin: 0;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+      }
+      
+      .nav-menu a {
+        padding: 16px 24px;      /* Bigger touch target for mobile */
+        width: 100%;
+        justify-content: flex-start; /* Left align text on mobile */
+        font-size: 1.1rem;
+      }
+      
       .hamburger {
         display: block;
       }
+      
       .about-grid, .contact-grid, .why-grid {
         grid-template-columns: 1fr;
       }
+      
       .hero h1 {
         font-size: 3rem;
       }
+      
       .about-photo {
         max-width: 260px;
       }
     }
+    
     @media (max-width: 500px) {
       .hero-btns {
         flex-direction: column;
@@ -561,97 +580,68 @@
         text-align: center;
       }
     }
-    /* ===== EXTRA MOBILE OPTIMIZATION ===== */
-
-@media (max-width: 768px) {
-
-  section {
-    padding: 60px 0;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-
-  /* HERO FIX */
-  .hero {
-    min-height: auto;
-    padding: 60px 0;
-    text-align: center;
-  }
-
-  .hero h1 {
-    font-size: 2.3rem;
-    line-height: 1.3;
-  }
-
-  .hero .subhead {
-    font-size: 1.1rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .hero-btns {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .btn {
-    width: 100%;
-  }
-
-  /* NAV FIX */
-  .nav-container {
-    padding: 0 15px;
-  }
-
-  /* ABOUT FIX */
-  .about-grid {
-    gap: 30px;
-    text-align: center;
-  }
-
-  .highlights {
-    grid-template-columns: 1fr;
-  }
-
-  /* SERVICES FIX */
-  .services-grid {
-    gap: 20px;
-  }
-
-  /* PROJECT FIX */
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* WHY SECTION FIX */
-  .why-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* CONTACT FIX */
-  .contact-grid {
-    padding: 25px;
-  }
-
-  .contact-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .footer .container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-}
+    
+    @media (max-width: 768px) {
+      section {
+        padding: 60px 0;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .hero {
+        min-height: auto;
+        padding: 60px 0;
+        text-align: center;
+      }
+      .hero h1 {
+        font-size: 2.3rem;
+        line-height: 1.3;
+      }
+      .hero .subhead {
+        font-size: 1.1rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .hero-btns {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn {
+        width: 100%;
+      }
+      .about-grid {
+        gap: 30px;
+        text-align: center;
+      }
+      .highlights {
+        grid-template-columns: 1fr;
+      }
+      .services-grid {
+        gap: 20px;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-grid {
+        padding: 25px;
+      }
+      .contact-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer .container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- STICKY NAVBAR -->
+  <!-- Same HTML content, no changes needed here -->
   <nav class="navbar">
     <div class="container nav-container">
       <div class="logo">Arpit<span>.</span></div>
@@ -668,9 +658,9 @@
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
+  <!-- Rest of your HTML remains exactly the same -->
   <section class="hero" id="home">
-    <div class="container hero-content fade-section visible"> <!-- visible by default -->
+    <div class="container hero-content fade-section visible">
       <h1>Hi, I'm <span>Arpit Maurya</span></h1>
       <div class="subhead">Freelance Web Developer | Static & Dynamic Website Specialist</div>
       <p>I help small businesses, students, and startups build modern, responsive, and high-performing websites that grow their online presence.</p>
@@ -681,7 +671,6 @@
     </div>
   </section>
 
-  <!-- ABOUT SECTION (with circular photo) -->
   <section id="about" class="container fade-section"><br><br>
     <h2 class="section-title">About <span>Me</span></h2>
     <div class="about-grid">
@@ -696,13 +685,11 @@
         </div>
       </div>
       <div class="about-photo">
-        <!-- Replace the src with your actual photo path. The file name is IMG-20250928-WA0056.jpg -->
         <img src="my.png" alt="Arpit Maurya - Freelance Web Developer">
       </div>
     </div>
   </section>
 
-  <!-- SERVICES SECTION -->
   <section id="services" class="container fade-section"><br> <br>
     <h2 class="section-title">My <span>Services</span></h2>
     <div class="services-grid">
@@ -714,7 +701,6 @@
     </div>
   </section>
 
-  <!-- SKILLS SECTION -->
   <section id="skills" class="container fade-section"><br><br>
     <h2 class="section-title">Technical <span>Skills</span></h2>
     <div class="skills-container">
@@ -727,7 +713,6 @@
     </div>
   </section>
 
-  <!-- PROJECTS SECTION -->
   <section id="projects" class="container fade-section"><br><br>
     <h2 class="section-title">My <span>Projects</span></h2>
     <div class="projects-grid">
@@ -737,7 +722,6 @@
     </div>
   </section>
 
-  <!-- WHY CHOOSE ME -->
   <section id="why" class="container fade-section"><br><br>
     <h2 class="section-title">Why <span>Choose Me?</span></h2>
     <div class="why-grid">
@@ -748,44 +732,39 @@
     </div>
   </section>
 
-  <!-- CONTACT SECTION -->
   <section id="contact" class="container fade-section"><br><br>
     <h2 class="section-title">Contact <span>Me</span></h2>
     <div class="contact-grid">
       <div>
         <p style="margin-bottom: 25px; font-size: 1.2rem;">Have a project in mind? Let's work together!</p>
-       <form action="https://formspree.io/f/mbdazblk" method="POST">
-  <div class="form-group">
-    <input type="text" name="name" placeholder="Your Name" required>
-  </div>
-
-  <div class="form-group">
-    <input type="email" name="email" placeholder="Email Address" required>
-  </div>
-
-  <div class="form-group">
-    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-  </div>
-
-  <button type="submit" class="btn btn-primary" style="border:none;">
-    Send Message
-  </button>
-</form>
+        <form action="https://formspree.io/f/mbdazblk" method="POST">
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Email Address" required>
+          </div>
+          <div class="form-group">
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="border:none;">
+            Send Message
+          </button>
+        </form>
       </div>
       <div class="contact-info">
         <div class="contact-row"><i class="fas fa-map-marker-alt"></i> <span>sector-19 indra nagar Lucknow, India</span></div>
         <div class="contact-row"><i class="fas fa-envelope"></i> <span>arpitamaurya8081735269@example.com</span></div>
         <div class="contact-row"><i class="fab fa-whatsapp"></i> <span>+91 91401 92127</span></div>
         <div class="whatsapp-inline"><a href="https://wa.me/9140192127" target="_blank" class="whatsapp-link">
-  <button class="whatsapp-btn">
-    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-  </button>
-</a></div>
+          <button class="whatsapp-btn">
+            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+          </button>
+        </a></div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div>© 2026 Arpit Maurya. All Rights Reserved.</div>
@@ -796,13 +775,10 @@
     </div>
   </footer>
 
-  <!-- SCROLL TO TOP BUTTON -->
   <div class="scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></div>
 
-  <!-- JAVASCRIPT -->
   <script>
     (function() {
-      // MOBILE HAMBURGER
       const hamburger = document.getElementById('hamburger');
       const navMenu = document.getElementById('navMenu');
 
@@ -810,14 +786,12 @@
         navMenu.classList.toggle('active');
       });
 
-      // close menu on link click (optional)
       document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', () => {
           navMenu.classList.remove('active');
         });
       });
 
-      // SCROLL TO TOP BUTTON
       const scrollBtn = document.getElementById('scrollTop');
       window.addEventListener('scroll', () => {
         if (window.scrollY > 500) {
@@ -830,7 +804,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // FADE ON SCROLL (Intersection Observer)
       const fadeElements = document.querySelectorAll('.fade-section');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -841,8 +814,6 @@
       }, { threshold: 0.2, rootMargin: '0px 0px -30px 0px' });
 
       fadeElements.forEach(el => observer.observe(el));
-
-      // Ensure hero is visible already
       document.querySelector('.hero .fade-section')?.classList.add('visible');
     })();
   </script>
