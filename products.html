@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-88">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - Prachi Bakery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8b5a2b, #c9a87c, #fff9f0);
+            background-size: 300% 300%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            
+            /* Background Animation */
+            animation: gradientBG 8s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animated Circles in Background */
+        .circle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s infinite;
+        }
+
+        .circle1 {
+            width: 200px;
+            height: 200px;
+            top: -50px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+
+        .circle2 {
+            width: 300px;
+            height: 300px;
+            bottom: -100px;
+            right: -100px;
+            animation-delay: 2s;
+        }
+
+        .circle3 {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        /* Main Content */
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 20px;
+            backdrop-filter: blur(5px);
+            border: 2px solid white;
+            
+            /* Container Animation */
+            animation: containerPulse 3s infinite;
+        }
+
+        @keyframes containerPulse {
+            0% { transform: scale(1); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+            50% { transform: scale(1.02); box-shadow: 0 30px 50px rgba(139, 90, 43, 0.3); }
+            100% { transform: scale(1); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        }
+
+        /* Bakery Icon Animation */
+        .bakery-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Main "Coming Soon" Text */
+        h1 {
+            font-size: 5rem;
+            color: #8b5a2b;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 0 #c9a87c;
+            font-family: 'Georgia', serif;
+            
+            /* Text Animation */
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 3px 3px 0 #c9a87c; }
+            50% { text-shadow: 5px 5px 10px #8b5a2b, 0 0 20px #ffd7a5; }
+            100% { text-shadow: 3px 3px 0 #c9a87c; }
+        }
+
+        /* Subtext */
+        p {
+            font-size: 1.5rem;
+            color: #4a2c2c;
+            margin: 1.5rem 0;
+            line-height: 1.6;
+            
+            /* Fade Animation */
+            animation: fadeSlide 3s infinite;
+        }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0.7; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-5px); }
+            100% { opacity: 0.7; transform: translateY(0); }
+        }
+
+        /* Loading Dots Animation */
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            background: #8b5a2b;
+            border-radius: 50%;
+            animation: dotPulse 1.5s infinite;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { transform: scale(0.5); opacity: 0.5; }
+            50% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Back to Home Button */
+        .home-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: #8b5a2b;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            border: 2px solid white;
+            
+            /* Button Animation */
+            animation: buttonPulse 2s infinite;
+        }
+
+        @keyframes buttonPulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 90, 43, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(139, 90, 43, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 90, 43, 0); }
+        }
+
+        .home-btn:hover {
+            background: #6b431a;
+            transform: scale(1.1);
+        }
+
+        /* Timer/Date Style */
+        .timer {
+            font-size: 1.3rem;
+            color: #c97c3e;
+            font-weight: bold;
+            margin: 1rem 0;
+            
+            /* Blink Animation */
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            p {
+                font-size: 1.2rem;
+            }
+            
+            .bakery-icon {
+                font-size: 4rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .bakery-icon {
+                font-size: 3rem;
+            }
+            
+            .circle1, .circle2, .circle3 {
+                opacity: 0.3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Circles -->
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Bakery Icon with Bounce Animation -->
+        <div class="bakery-icon">
+            🧁
+        </div>
+
+        <!-- Main Coming Soon Text with Glow Animation -->
+        <h1>COMING SOON</h1>
+
+        <!-- Subtext with Fade Animation -->
+        <p>We're baking something special for you!</p>
+        <p>Our delicious products will be available very soon.</p>
+
+        <!-- Timer/Announcement -->
+        <div class="timer">
+            ✨ Expected Launch: April 2025 ✨
+        </div>
+
+        <!-- Loading Dots Animation -->
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <!-- Additional Bakery Items Animation (Text) -->
+        <div style="font-size: 2rem; margin: 1rem 0; animation: bounce 3s infinite;">
+            🎂 🥐 🍪
+        </div>
+
+        <!-- Back to Home Button -->
+        <a href="index2.html" class="home-btn">← Back to Home</a>
+    </div>
+
+    <!-- Optional: Add small text at bottom -->
+    <div style="position: fixed; bottom: 10px; left: 0; right: 0; text-align: center; color: white; font-size: 0.9rem; background: rgba(0,0,0,0.3); padding: 5px;">
+        Prachi Bakery | Freshly Baked with Love ❤️
+    </div>
+</body>
+</html>
