@@ -57,12 +57,12 @@
 
     /* ----- REUSABLE SECTION STYLES ----- */
     section {
-      padding: 110px 0 90px;  /* Increased top padding from 100px to 110px */
+      padding: 110px 0 90px;
     }
 
     @media (max-width: 768px) {
       section {
-        padding: 80px 0 60px;  /* Mobile ke liye bhi increased */
+        padding: 80px 0 60px;
       }
       
       section + section {
@@ -75,20 +75,13 @@
       font-weight: 700;
       color: var(--dark);
       margin-bottom: 50px;
-      margin-top: 20px;  /* 👈 Naya: heading ke upar bhi gap */
+      margin-top: 20px;
       text-align: center;
       letter-spacing: -0.02em;
     }
     
-    /* About section ke liye extra specific spacing */
-    #about .section-title {
-      margin-top: 30px;
-    }
-    
-    #services .section-title {
-      margin-top: 30px;
-    }
-    
+    #about .section-title,
+    #services .section-title,
     #skills .section-title {
       margin-top: 30px;
     }
@@ -383,6 +376,7 @@
       overflow: hidden;
       box-shadow: var(--shadow-sm);
       transition: var(--transition);
+      cursor: pointer; /* Indicates clickable */
     }
     .project-card:hover {
       transform: scale(1.02);
@@ -422,6 +416,8 @@
       text-decoration: none;
       font-weight: 600;
       color: var(--primary);
+      position: relative; /* Ensures clicks go to the link */
+      z-index: 2; /* Above card click */
     }
 
     /* Why Me */
@@ -701,9 +697,6 @@
   </style>
 </head>
 <body>
-  <!-- Navbar, Hero, and all sections same as before... -->
-  <!-- (Keeping all HTML content same as previous version) -->
-  
   <nav class="navbar">
     <div class="container nav-container">
       <div class="logo">Arpit<span>.</span></div>
@@ -740,7 +733,7 @@
     </div>
   </section>
 
-  <!-- ABOUT SECTION (No photo, centered) -->
+  <!-- ABOUT SECTION -->
   <section id="about" class="container fade-section">
     <h2 class="section-title">About <span>Me</span></h2>
     <div class="about-content">
@@ -793,13 +786,52 @@
     </div>
   </section>
 
-  <!-- PROJECTS SECTION -->
+  <!-- PROJECTS SECTION (FIXED & CLICKABLE) -->
   <section id="projects" class="container fade-section">
     <h2 class="section-title">My <span>Projects</span></h2>
     <div class="projects-grid">
-      <div class="project-card"><div class="project-img" style="background:#9bbdf0;"><i class="fas fa-building fa-4x"></i></div><div class="project-info"><h3>Business Website (Static)</h3><p>Modern static site for local company with services, contact form & responsive layout.</p><div class="project-links"><a href="#">Live Demo</a><a href="#">View Code</a></div></div></div>
-      <div class="project-card"><div class="project-img" style="background:#a5d0ee;"><i class="fas fa-user-graduate fa-4x"></i></div><div class="project-info"><h3>Student Portfolio</h3><p>Personal portfolio for students to showcase projects, skills & contact.</p><div class="project-links"><a href="#">Live Demo</a><a href="#">View Code</a></div></div></div>
-      <div class="project-card"><div class="project-img" style="background:#8fb9e8;"><i class="fas fa-blog fa-4x"></i></div><div class="project-info"><h3>Dynamic Blog Website</h3><p>PHP/MySQL blog with post management and database integration.</p><div class="project-links"><a href="#">Live Demo</a><a href="#">View Code</a></div></div></div>
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="project-img" style="background:#9bbdf0;">
+          <i class="fas fa-building fa-4x"></i>
+        </div>
+        <div class="project-info">
+          <h3>Business Website (Static)</h3>
+          <p>Modern static site for local company with services, contact form & responsive layout.</p>
+          <div class="project-links">
+            <a href="index2.html" class="live-demo"></a>
+            
+          </div>
+        </div>
+      </div>
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-img" style="background:#a5d0ee;">
+          <i class="fas fa-user-graduate fa-4x"></i>
+        </div>
+        <div class="project-info">
+          <h3>Student Portfolio</h3>
+          <p>Personal portfolio for students to showcase projects, skills & contact.</p>
+          <div class="project-links">
+            <a href="#" class="live-demo">Live Demo</a>
+            <a href="#" class="view-code">View Code</a>
+          </div>
+        </div>
+      </div>
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-img" style="background:#8fb9e8;">
+          <i class="fas fa-blog fa-4x"></i>
+        </div>
+        <div class="project-info">
+          <h3>Dynamic Blog Website</h3>
+          <p>PHP/MySQL blog with post management and database integration.</p>
+          <div class="project-links">
+            <a href="#" class="live-demo">Live Demo</a>
+            <a href="#" class="view-code">View Code</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -864,6 +896,7 @@
 
   <script>
     (function() {
+      // Hamburger menu
       const hamburger = document.getElementById('hamburger');
       const navMenu = document.getElementById('navMenu');
 
@@ -877,6 +910,7 @@
         });
       });
 
+      // Scroll to top button
       const scrollBtn = document.getElementById('scrollTop');
       window.addEventListener('scroll', () => {
         if (window.scrollY > 500) {
@@ -889,6 +923,7 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
+      // Fade sections on scroll
       const fadeElements = document.querySelectorAll('.fade-section');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -900,6 +935,24 @@
 
       fadeElements.forEach(el => observer.observe(el));
       document.querySelector('.hero .fade-section')?.classList.add('visible');
+
+      // ---------- MAKE PROJECT CARDS CLICKABLE ----------
+      const projectCards = document.querySelectorAll('.project-card');
+      projectCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          // If the click was on an <a> element or inside .project-links, do nothing (let the link handle it)
+          if (e.target.closest('a')) return;
+
+          // Otherwise, find the first "Live Demo" link inside this card
+          const liveDemoLink = this.querySelector('.project-links a.live-demo');
+          if (liveDemoLink && liveDemoLink.href && liveDemoLink.href !== '#') {
+            window.location.href = liveDemoLink.href;
+          } else {
+            // Optional: fallback or message
+            console.log('No live demo link set for this project.');
+          }
+        });
+      });
     })();
   </script>
 </body>
