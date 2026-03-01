@@ -354,18 +354,19 @@
       box-shadow: var(--shadow-hover);
     }
 
-    .project-img {
-      height: 210px;
-      background: linear-gradient(145deg, #a6c4f0, #7ca5e8);
-      border-radius: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
+   .project-img {
+  height: 210px;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
 
+.project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
     /* SKILLS progress modern */
        .skills-container {
       max-width: 850px;
@@ -668,7 +669,7 @@
           </div>
         </div>
         <div class="hero-photo">
-          <img src="my.png" alt="Arpit Maurya">
+          <img src="images/my.png" alt="Arpit Maurya">
         </div>
       </div>
     </div>
@@ -717,9 +718,9 @@
   <section id="projects" class="container fade-section"><br><br><br>
     <h2 class="section-title">My <span>Projects</span></h2>
     <div class="projects-grid">
-      <div class="project-card"><div class="project-img"><i class="fas fa-building fa-4x"></i></div><div class="project-info"><h3>Business Site (Static)</h3><p>Modern company site with services & contact.</p><div class="project-links"><a href="#" class="live-demo"></a></div></div></div>
-      <div class="project-card"><div class="project-img"><i class="fas fa-user-graduate fa-4x"></i></div><div class="project-info"><h3>Student Portfolio</h3><p>Showcase projects, skills & contact.</p><div class="project-links"><a href="#" class="live-demo"></a></div></div></div>
-      <div class="project-card"><div class="project-img"><i class="fas fa-blog fa-4x"></i></div><div class="project-info"><h3>Dynamic Blog</h3><p>PHP/MySQL blog with admin panel.</p><div class="project-links"><a href="#" class="live-demo"></a></div></div></div>
+      <div class="project-card"><div class="project-img"><img src="images/caffe.jpeg" alt="Business Website Preview"></div><div class="project-info"><h3>Business Site (Static)</h3><p>Modern company site with services & contact.</p><div class="project-links"><a href="index2.html" class="live-demo"></a></div></div></div>
+      <div class="project-card"><div class="project-img"> <img src="images/cv.jpeg" alt="student portfolio Website Preview"></div><div class="project-info"><h3>Student Portfolio</h3><p>Showcase projects, skills & contact.</p><div class="project-links"><a href="index3.html" class="live-demo"></a></div></div></div>
+      <div class="project-card"><div class="project-img"> <img src="images/blog.jpeg" alt="Dynamic BlogS Website Preview"></div><div class="project-info"><h3>Dynamic Blog</h3><p>PHP/MySQL blog with admin panel.</p><div class="project-links"><a href="index3.html" class="live-demo"></a></div></div></div>
     </div>
   </section>
 
@@ -741,8 +742,8 @@
       <div>
         <p style="margin-bottom: 25px; font-size:1.2rem;">Let’s bring your idea to life — just a message away.</p>
         <form action="https://formspree.io/f/mbdazblk" method="POST">
-          <div class="form-group"><input type="text" name="name" placeholder="Your name" required></div>
-          <div class="form-group"><input type="email" name="email" placeholder="Email address" required></div>
+          <div class="form-group"><input type="text" name="name" placeholder="Your name" required></div><br>
+          <div class="form-group"><input type="email" name="email" placeholder="Email address" required></div><br>
           <div class="form-group"><textarea name="message" rows="5" placeholder="Tell me about your project" required></textarea></div>
           <button type="submit" class="btn btn-primary" style="width:auto; min-width:200px;">Send message</button>
         </form>
