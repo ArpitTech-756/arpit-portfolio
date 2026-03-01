@@ -414,6 +414,7 @@
     /* ----- CONTACT SECTION (improved mobile) ----- */
     #contact {
       background: linear-gradient(120deg, #e8f0fe, white);
+   
     }
 
     .contact-grid {
@@ -572,8 +573,10 @@
       }
 
       .hero-btns {
-        justify-content: center;
-      }
+  display: flex;
+  gap: 20px;   /* yahan se space control hoga */
+  margin-top: 25px;
+}
 
       .highlights {
         grid-template-columns: repeat(2, 1fr);
@@ -664,12 +667,12 @@
           <div class="subhead">Freelance Web Developer · static & dynamic</div>
           <p>I help small businesses, students, and startups build modern, responsive websites that grow their online presence.</p>
           <div class="hero-btns">
-            <a href="#contact" class="btn btn-primary">Hire Me</a>
+            <a href="#contact" class="btn btn-primary" >Hire Me</a>
             <a href="#projects" class="btn btn-outline">View Projects</a>
           </div>
         </div>
         <div class="hero-photo">
-          <img src="my.png" alt="Arpit Maurya">
+          <img src="images/my.png" alt="Arpit Maurya">
         </div>
       </div>
     </div>
@@ -718,9 +721,9 @@
   <section id="projects" class="container fade-section"><br><br><br>
     <h2 class="section-title">My <span>Projects</span></h2>
     <div class="projects-grid">
-      <div class="project-card"><div class="project-img"><img src="caffe.jpeg" alt="Business Website Preview"></div><div class="project-info"><h3>Business Site (Static)</h3><p>Modern company site with services & contact.</p><div class="project-links"><a href="index2.html" class="live-demo"></a></div></div></div>
-      <div class="project-card"><div class="project-img"> <img src="cv.jpeg" alt="student portfolio Website Preview"></div><div class="project-info"><h3>Student Portfolio</h3><p>Showcase projects, skills & contact.</p><div class="project-links"><a href="index3.html" class="live-demo"></a></div></div></div>
-      <div class="project-card"><div class="project-img"> <img src="blog.jpeg" alt="Dynamic BlogS Website Preview"></div><div class="project-info"><h3>Dynamic Blog</h3><p>PHP/MySQL blog with admin panel.</p><div class="project-links"><a href="index3.html" class="live-demo"></a></div></div></div>
+      <div class="project-card"><div class="project-img"><img src="images/caffe.jpeg" alt="Business Website Preview"></div><div class="project-info"><h3>Business Site (Static)</h3><p>Modern company site with services & contact.</p><div class="project-links"><a href="index2.html" class="live-demo"></a></div></div></div>
+      <div class="project-card"><div class="project-img"> <img src="images/cv.jpeg" alt="student portfolio Website Preview"></div><div class="project-info"><h3>Student Portfolio</h3><p>Showcase projects, skills & contact.</p><div class="project-links"><a href="index3.html" class="live-demo"></a></div></div></div>
+      <div class="project-card"><div class="project-img"> <img src="images/blog.jpeg" alt="Dynamic BlogS Website Preview"></div><div class="project-info"><h3>Dynamic Blog</h3><p>PHP/MySQL blog with admin panel.</p><div class="project-links"><a href="index3.html" class="live-demo"></a></div></div></div>
     </div>
   </section>
 
@@ -802,4 +805,3 @@
   </script>
 </body>
 </html>
-
