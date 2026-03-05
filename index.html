@@ -781,10 +781,19 @@
       hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
       document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
 
-      // scroll top
-      const scrollBtn = document.getElementById('scrollTop');
-      window.addEventListener('scroll', () => scrollBtn.classList.toggle('show', window.scrollY > 500));
-      scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    // scroll top
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('show', window.scrollY > 500);
+
+  // AUTO CLOSE NAVBAR ON SCROLL (Mobile)
+  if (window.innerWidth <= 900) {
+    if (navMenu.classList.contains('active')) { 
+      navMenu.classList.remove('active');
+    }
+  }
+});
+      
 
       // fade observer
       const observer = new IntersectionObserver((entries) => {
@@ -805,4 +814,3 @@
   </script>
 </body>
 </html>
-
