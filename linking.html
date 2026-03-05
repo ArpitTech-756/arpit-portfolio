@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>curated connections • central</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: #0b0c15;  /* fallback dark */
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      opacity: 0;
+      animation: pageFadeIn 1s ease-out forwards;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    @keyframes pageFadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* ---------- ANIMATED BACKGROUND (floating shapes / mesh) ---------- */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .float-shape {
+      position: absolute;
+      width: 50vmax;
+      height: 50vmax;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(100, 150, 255, 0.4), rgba(180, 130, 255, 0.2));
+      filter: blur(70px);
+      animation: floatAround 20s infinite alternate ease-in-out;
+    }
+
+    .shape-1 {
+      top: -20vh;
+      right: -10vw;
+      background: radial-gradient(circle at 20% 30%, #7f9cf5, #a78bfa);
+      opacity: 0.5;
+      animation-duration: 25s;
+    }
+
+    .shape-2 {
+      bottom: -15vh;
+      left: -5vw;
+      width: 60vmax;
+      height: 60vmax;
+      background: radial-gradient(circle at 70% 20%, #5f6caf, #c084fc);
+      opacity: 0.4;
+      animation-duration: 30s;
+      animation-delay: -5s;
+    }
+
+    .shape-3 {
+      top: 40vh;
+      left: 30vw;
+      width: 40vmax;
+      height: 40vmax;
+      background: radial-gradient(circle at 40% 70%, #38bdf8, #818cf8);
+      opacity: 0.3;
+      animation-duration: 22s;
+      animation-delay: -2s;
+    }
+
+    @keyframes floatAround {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(5%, 5%) scale(1.2); }
+    }
+
+    /* additional moving gradient overlay (mesh effect) */
+    .mesh-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 40%, rgba(20, 30, 50, 0.4) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(40, 20, 60, 0.3) 0%, transparent 50%);
+      z-index: -1;
+      animation: subtleShift 15s infinite alternate;
+    }
+
+    @keyframes subtleShift {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    /* ---------- MAIN CONTENT (fully centered) ---------- */
+    .center-content {
+      text-align: center;
+      max-width: 900px;
+      padding: 2rem;
+      margin: 2rem;
+      z-index: 10;
+      position: relative;
+    }
+
+    /* ---------- HERO HEADING (gradient, fade-up) ---------- */
+    .hero-title {
+      font-size: clamp(3rem, 10vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(130deg, #ffffff, #c1c8ff, #a5b4fc, #b7aaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 300% auto;
+      animation: gradientShift 8s ease infinite, slideUpFade 1s ease-out;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes slideUpFade {
+      0% { opacity: 0; transform: translateY(25px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-sub {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 300;
+      color: rgba(230, 230, 255, 0.8);
+      max-width: 600px;
+      margin: 0 auto 3rem auto;
+      animation: slideUpFade 1s ease-out 0.1s both;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- CENTRAL BACK TO HOME BUTTON (premium, glow, gradient) ---------- */
+    .back-home-central {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(15, 20, 30, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 2px solid transparent;
+      border-radius: 80px;
+      padding: 1.2rem 3rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(130, 150, 255, 0.3), 0 8px 25px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+      text-decoration: none;
+      border-image: linear-gradient(120deg, #a78bfa, #5f6caf, #38bdf8) 1;
+      border-image-slice: 1;
+      animation: slideUpFade 1s ease-out 0.2s both, glowPulse 4s infinite alternate;
+      position: relative;
+      z-index: 20;
+      letter-spacing: 0.5px;
+    }
+
+    .back-home-central i {
+      font-size: 1.6rem;
+      transition: transform 0.2s ease;
+    }
+
+    .back-home-central:hover {
+      transform: scale(1.06);
+      background: rgba(30, 40, 60, 0.5);
+      box-shadow: 0 0 35px #8b7cf0, 0 15px 30px rgba(0, 0, 0, 0.4);
+      border-color: transparent; /* keep gradient border via border-image */
+    }
+
+    .back-home-central:hover i {
+      transform: translateX(-6px);
+    }
+
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 20px rgba(140, 130, 250, 0.3), 0 8px 25px rgba(0,0,0,0.3); }
+      100% { box-shadow: 0 0 45px rgba(170, 150, 255, 0.7), 0 15px 30px rgba(0,0,0,0.4); }
+    }
+
+    /* additional micro-interaction: magnetic / ripple? we can keep subtle */
+    .back-home-central:active {
+      transform: scale(0.98);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 600px) {
+      .center-content {
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+      .back-home-central {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        gap: 0.7rem;
+      }
+      .back-home-central i {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* fade-out for page transition */
+    body.fade-out {
+      animation: fadeOut 0.4s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- animated background: floating shapes + mesh overlay -->
+  <div class="bg-animation">
+    <div class="float-shape shape-1"></div>
+    <div class="float-shape shape-2"></div>
+    <div class="float-shape shape-3"></div>
+  </div>
+  <div class="mesh-overlay"></div>
+
+  <!-- centered content: title, subtitle, and central back-home button -->
+  <div class="center-content">
+    <h1 class="hero-title">curated connections</h1>
+    <p class="hero-sub">a minimal space to return — elegantly.</p>
+    
+    <!-- central back to home button with icon & glow -->
+    <button class="back-home-central" id="backHomeBtn" >
+      <i class="fas fa-arrow-left"></i>
+      <span>back to home</span>
+    </button>
+  </div>
+
+  <script>
+    (function() {
+      const backBtn = document.getElementById('backHomeBtn');
+      let isRedirecting = false;
+
+      backBtn.addEventListener('click', function(e) {
+        e.preventDefault();  // safe for button
+        if (isRedirecting) return;
+        isRedirecting = true;
+
+        // add fade-out to body
+        document.body.classList.add('fade-out');
+
+        // after animation, redirect to index.html
+        setTimeout(() => {
+          window.location.href = "index3.html";  // relative, assumes index.html exists
+        }, 400); // matches fadeOut duration
+      });
+
+      // Optional: add a small parallax effect to shapes based on mouse? not required, but can be a tiny premium touch.
+      // But we'll keep it minimal as requested.
+      // We also want to ensure the background animation runs smoothly.
+      // If you want a subtle magnetic effect on the button, we can do with JS, but CSS hover is enough.
+
+      // Also ensure that the page loads with everything in place. The CSS fade-in covers it.
+    })();
+  </script>
+</body>
+</html>
