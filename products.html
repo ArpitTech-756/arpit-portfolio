@@ -1,302 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-88">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon - Prachi Bakery</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon · Oma Londo</title>
+  <!-- Google Fonts: Playfair Display for elegance, Inter for modern sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    html, body {
+  height: 100%;
+}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #8b5a2b, #c9a87c, #fff9f0);
-            background-size: 300% 300%;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-            
-            /* Background Animation */
-            animation: gradientBG 8s ease infinite;
-        }
+ body {
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at 10% 20%, #2b1a0f, #1a0f0a, #0c0b0e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  overflow-x: hidden;
+}
+    /* Animated gradient overlay */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(125deg, #d4a373, #9e6b4e, #6b3e2b, #3b2a1c);
+      background-size: 300% 300%;
+      opacity: 0.5;
+      animation: gradientMove 18s ease infinite;
+      z-index: 0;
+    }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        /* Animated Circles in Background */
-        .circle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 6s infinite;
-        }
+    /* Floating particles (food/dots) */
+    .particle {
+      position: absolute;
+      background: rgba(255, 215, 140, 0.2);
+      border-radius: 50%;
+      filter: blur(30px);
+      z-index: 0;
+      animation: floatParticle 20s infinite alternate;
+    }
 
-        .circle1 {
-            width: 200px;
-            height: 200px;
-            top: -50px;
-            left: -50px;
-            animation-delay: 0s;
-        }
+    .particle1 {
+      width: 300px;
+      height: 300px;
+      top: -100px;
+      left: -100px;
+      background: rgba(244, 162, 97, 0.25);
+    }
 
-        .circle2 {
-            width: 300px;
-            height: 300px;
-            bottom: -100px;
-            right: -100px;
-            animation-delay: 2s;
-        }
+    .particle2 {
+      width: 400px;
+      height: 400px;
+      bottom: -150px;
+      right: -150px;
+      background: rgba(231, 111, 81, 0.25);
+      animation-duration: 25s;
+    }
 
-        .circle3 {
-            width: 150px;
-            height: 150px;
-            top: 50%;
-            left: 20%;
-            animation-delay: 4s;
-        }
+    .particle3 {
+      width: 200px;
+      height: 200px;
+      top: 40%;
+      left: 70%;
+      background: rgba(255, 229, 180, 0.3);
+      animation-duration: 15s;
+    }
 
-        @keyframes float {
-            0% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-20px) scale(1.1); }
-            100% { transform: translateY(0) scale(1); }
-        }
+    @keyframes floatParticle {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, -60px) scale(1.2); }
+    }
 
-        /* Main Content */
-        .container {
-            text-align: center;
-            z-index: 10;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            max-width: 800px;
-            margin: 20px;
-            backdrop-filter: blur(5px);
-            border: 2px solid white;
-            
-            /* Container Animation */
-            animation: containerPulse 3s infinite;
-        }
+    /* Main glass card */
+    .card {
+      position: relative;
+      z-index: 20;
+      max-width: 780px;
+      width: 100%;
+      background: rgba(20, 15, 12, 0.4);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 4rem;
+      padding: 3.5rem 2.5rem;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 210, 140, 0.2);
+      border: 1px solid rgba(255, 180, 100, 0.3);
+      color: white;
+      text-align: center;
+      animation: appear 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+      transform-origin: center;
+    }
 
-        @keyframes containerPulse {
-            0% { transform: scale(1); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-            50% { transform: scale(1.02); box-shadow: 0 30px 50px rgba(139, 90, 43, 0.3); }
-            100% { transform: scale(1); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-        }
+    @keyframes appear {
+      0% { opacity: 0; transform: scale(0.92) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
 
-        /* Bakery Icon Animation */
-        .bakery-icon {
-            font-size: 5rem;
-            margin-bottom: 1rem;
-            display: inline-block;
-            animation: bounce 2s infinite;
-        }
+    /* Est. badge */
+    .est {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.5rem 1.8rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255, 210, 140, 0.3);
+      backdrop-filter: blur(4px);
+      animation: slideUp 0.7s 0.1s both;
+    }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
+    /* Main Coming Soon headline */
+    .coming-soon-main {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 15vw, 7rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      background: linear-gradient(145deg, #fff3e0, #ffd9a5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: slideUp 0.7s 0.2s both;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
 
-        /* Main "Coming Soon" Text */
-        h1 {
-            font-size: 5rem;
-            color: #8b5a2b;
-            margin-bottom: 1rem;
-            text-shadow: 3px 3px 0 #c9a87c;
-            font-family: 'Georgia', serif;
-            
-            /* Text Animation */
-            animation: glow 2s infinite;
-        }
+    /* Optional subtext */
+    .subtext {
+      font-size: 1.2rem;
+      font-weight: 300;
+      letter-spacing: 4px;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+      animation: slideUp 0.7s 0.3s both;
+    }
 
-        @keyframes glow {
-            0% { text-shadow: 3px 3px 0 #c9a87c; }
-            50% { text-shadow: 5px 5px 10px #8b5a2b, 0 0 20px #ffd7a5; }
-            100% { text-shadow: 3px 3px 0 #c9a87c; }
-        }
+    /* Question marks – animated */
+    .question-box {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 2rem 0 1.5rem;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: #ffdbb5;
+      opacity: 0.6;
+    }
 
-        /* Subtext */
-        p {
-            font-size: 1.5rem;
-            color: #4a2c2c;
-            margin: 1.5rem 0;
-            line-height: 1.6;
-            
-            /* Fade Animation */
-            animation: fadeSlide 3s infinite;
-        }
+    .question-box span {
+      animation: pulse 2.5s infinite;
+      display: inline-block;
+    }
 
-        @keyframes fadeSlide {
-            0% { opacity: 0.7; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(-5px); }
-            100% { opacity: 0.7; transform: translateY(0); }
-        }
+    .question-box span:nth-child(2) {
+      animation-delay: 0.8s;
+    }
+    .question-box span:nth-child(3) {
+      animation-delay: 1.6s;
+    }
 
-        /* Loading Dots Animation */
-        .dots {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
 
-        .dot {
-            width: 20px;
-            height: 20px;
-            background: #8b5a2b;
-            border-radius: 50%;
-            animation: dotPulse 1.5s infinite;
-        }
+    /* Platforms */
+    .platforms {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2.5rem 0 1rem;
+      animation: slideUp 0.7s 0.4s both;
+    }
 
-        .dot:nth-child(2) {
-            animation-delay: 0.5s;
-        }
+    .platform {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 0.9rem 2rem;
+      border-radius: 60px;
+      border: 1px solid rgba(255, 190, 100, 0.3);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      cursor: default;
+      text-decoration: none;
+      color: white;
+    }
 
-        .dot:nth-child(3) {
-            animation-delay: 1s;
-        }
+    .platform i {
+      font-size: 2rem;
+      color: #ffb16f;
+      transition: transform 0.2s;
+    }
 
-        @keyframes dotPulse {
-            0%, 100% { transform: scale(0.5); opacity: 0.5; }
-            50% { transform: scale(1); opacity: 1; }
-        }
+    .platform span {
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
 
-        /* Back to Home Button */
-        .home-btn {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 1rem 2.5rem;
-            background: #8b5a2b;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: 0.3s;
-            border: 2px solid white;
-            
-            /* Button Animation */
-            animation: buttonPulse 2s infinite;
-        }
+    .platform:hover {
+      transform: translateY(-5px);
+      background: rgba(0, 0, 0, 0.6);
+      border-color: #ffb16f;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
 
-        @keyframes buttonPulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 90, 43, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(139, 90, 43, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 90, 43, 0); }
-        }
+    .platform:hover i {
+      transform: scale(1.1);
+    }
 
-        .home-btn:hover {
-            background: #6b431a;
-            transform: scale(1.1);
-        }
+    /* Back to Home button */
+    .home-button {
+      display: inline-block;
+      margin-top: 2.5rem;
+      padding: 0.7rem 1.8rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 210, 140, 0.3);
+      border-radius: 60px;
+      color: #ffeacb;
+      text-decoration: none;
+      font-weight: 300;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
+      animation: slideUp 0.7s 0.5s both;
+    }
 
-        /* Timer/Date Style */
-        .timer {
-            font-size: 1.3rem;
-            color: #c97c3e;
-            font-weight: bold;
-            margin: 1rem 0;
-            
-            /* Blink Animation */
-            animation: blink 1.5s infinite;
-        }
+    .home-button i {
+      margin-right: 0.5rem;
+      transition: transform 0.2s;
+    }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
+    .home-button:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #ffb16f;
+      transform: translateY(-2px);
+    }
 
-        /* Responsive Design */
-        @media screen and (max-width: 768px) {
-            h1 {
-                font-size: 3.5rem;
-            }
-            
-            p {
-                font-size: 1.2rem;
-            }
-            
-            .bakery-icon {
-                font-size: 4rem;
-            }
-            
-            .container {
-                padding: 1.5rem;
-            }
-        }
+    .home-button:hover i {
+      transform: translateX(-3px);
+    }
 
-        @media screen and (max-width: 480px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            p {
-                font-size: 1rem;
-            }
-            
-            .bakery-icon {
-                font-size: 3rem;
-            }
-            
-            .circle1, .circle2, .circle3 {
-                opacity: 0.3;
-            }
-        }
-    </style>
+    /* Small footer note */
+    .location {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      opacity: 0.4;
+      letter-spacing: 2px;
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .location span {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      align-self: center;
+    }
+
+    /* Entrance animations */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+   @media (max-width: 768px) {
+
+  body {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 2rem 1.2rem;
+    border-radius: 2rem;
+  }
+
+  .coming-soon-main {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+
+  .subtext {
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+  }
+
+  .platforms {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .platform {
+    width: 100%;
+    justify-content: center;
+    padding: 0.8rem 1rem;
+  }
+
+  .platform span {
+    font-size: 1rem;
+  }
+
+  .question-box {
+    font-size: 1.8rem;
+    gap: 0.6rem;
+  }
+
+  .home-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .location {
+    font-size: 0.7rem;
+  }
+}
+    @media (max-width: 400px) {
+      .coming-soon-main {
+        font-size: 2.8rem;
+        letter-spacing: 2px;
+      }
+      .subtext {
+        font-size: 1rem;
+        letter-spacing: 2px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Animated Background Circles -->
-    <div class="circle circle1"></div>
-    <div class="circle circle2"></div>
-    <div class="circle circle3"></div>
+  <!-- Floating background particles -->
+  <div class="particle particle1"></div>
+  <div class="particle particle2"></div>
+  <div class="particle particle3"></div>
 
-    <!-- Main Content Container -->
-    <div class="container">
-        <!-- Bakery Icon with Bounce Animation -->
-        <div class="bakery-icon">
-            🧁
-        </div>
+  <main class="card">
+    <!-- EST. 2010 -->
+    <div class="est">EST. 2010</div>
 
-        <!-- Main Coming Soon Text with Glow Animation -->
-        <h1>COMING SOON</h1>
+    <!-- Main coming soon message -->
+    <h1 class="coming-soon-main">COMING SOON</h1>
+    <div class="subtext">A new experience awaits</div>
 
-        <!-- Subtext with Fade Animation -->
-        <p>We're baking something special for you!</p>
-        <p>Our delicious products will be available very soon.</p>
-
-        <!-- Timer/Announcement -->
-        <div class="timer">
-            ✨ Expected Launch: April 2025 ✨
-        </div>
-
-        <!-- Loading Dots Animation -->
-        <div class="dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
-
-        <!-- Additional Bakery Items Animation (Text) -->
-        <div style="font-size: 2rem; margin: 1rem 0; animation: bounce 3s infinite;">
-            🎂 🥐 🍪
-        </div>
-
-        <!-- Back to Home Button -->
-        <a href="index2.html" class="home-btn">← Back to Home</a>
+    <!-- ??? animated -->
+    <div class="question-box">
+      <span>⁉️</span>
+      <span>❓</span>
+      <span>⁉️</span>
     </div>
 
-    <!-- Optional: Add small text at bottom -->
-    <div style="position: fixed; bottom: 10px; left: 0; right: 0; text-align: center; color: white; font-size: 0.9rem; background: rgba(0,0,0,0.3); padding: 5px;">
-        Prachi Bakery | Freshly Baked with Love ❤️
+    <!-- Available on GoFood & GrabFood -->
+    <div class="platforms">
+      <div class="platform">
+        <i class="fas fa-utensils"></i>
+        <span>GoFood</span>
+      </div>
+      <div class="platform">
+        <i class="fas fa-motorcycle"></i>
+        <span>GrabFood</span>
+      </div>
     </div>
+
+    <!-- subtle location hint -->
+    <div class="location">
+      <span></span> LUCKNOW • INDIA <span></span>
+    </div>
+
+    <!-- Back to Home button -->
+    <a href="index2.html" class="home-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </main>
 </body>
 </html>
