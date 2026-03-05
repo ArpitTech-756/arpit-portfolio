@@ -3,29 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>student portfolio · clean resume layout</title>
+  <title>Emily Johnson · frontend student</title>
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    /* ---------- RESET & VARIABLES ---------- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    :root {
+      --bg-light: #f8fafc;
+      --surface: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #2563eb;
+      --accent-soft: #3b82f6;
+      --border-light: #e2e8f0;
+      --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+      --shadow-md: 0 20px 30px -10px rgba(0,0,0,0.1);
+      --radius-md: 24px;
+      --radius-sm: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
     body {
-      background-color: #fafcff;
       font-family: "Inter", sans-serif;
-      color: #1e293b;
-      line-height: 1.5;
+      background-color: var(--bg-light);
+      color: var(--text-primary);
+      line-height: 1.6;
       scroll-behavior: smooth;
-      background-image: 
-        linear-gradient(rgba(200, 200, 230, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200, 200, 230, 0.1) 1px, transparent 1px);
-      background-size: 40px 40px;
+      overflow-x: hidden;
+    }
+
+    /* smooth scroll offset (sticky navbar) */
+    html {
+      scroll-padding-top: 90px;
+      scroll-behavior: smooth;
+    }
+
+    /* ---------- REVEAL ANIMATION (intersection observer) ---------- */
+    .section-hidden {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .section-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    /* ---------- TYPOGRAPHY & UTILS ---------- */
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 4px;
     }
 
     .container {
@@ -34,713 +88,735 @@
       padding: 0 24px;
     }
 
-    /* fade / scroll animations */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.1, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.1, 1);
+    section {
+      padding: 100px 0;
     }
 
-    .fade-up.revealed {
-      opacity: 1;
-      transform: translateY(0);
+    /* ---------- GLASSMORPHISM NAVBAR (sticky) ---------- */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+      padding: 16px 32px;
     }
 
-    /* floating effect */
-    .float {
-      animation: float 6s ease-in-out infinite;
+    .nav-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0px) perspective(500px) rotateY(2deg) rotateX(1deg); }
-      50% { transform: translateY(-12px) perspective(500px) rotateY(1deg) rotateX(0.5deg); }
-      100% { transform: translateY(0px) perspective(500px) rotateY(2deg) rotateX(1deg); }
-    }
-
-    /* soft shadow / cards */
-    .card-soft {
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(4px);
-      border-radius: 32px;
-      box-shadow: 0 20px 40px -10px rgba(0, 10, 30, 0.1), 0 4px 12px rgba(0, 0, 0, 0.02);
-      transition: all 0.3s ease;
-    }
-
-    .card-soft:hover {
-      box-shadow: 0 30px 50px -15px rgba(0, 20, 40, 0.2);
-      transform: scale(1.01) translateY(-4px);
-    }
-
-    /* section headers */
-    .section-title {
-      font-size: 2.5rem;
+    .logo {
+      font-size: 1.8rem;
       font-weight: 700;
+      background: linear-gradient(135deg, #1e293b, #2563eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-      position: relative;
-      display: inline-block;
     }
-    .section-title:after {
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-primary);
+      font-size: 1.05rem;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
       left: 0;
-      width: 70px;
-      height: 4px;
-      background: linear-gradient(90deg, #6c5b7b, #a8d0e6);
-      border-radius: 4px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+    .nav-links a:hover:after {
+      width: 100%;
+    }
+
+    /* mobile menu */
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text-primary);
     }
 
     /* ---------- HERO ---------- */
     .hero {
-      min-height: 90vh;
+      min-height: 85vh;
       display: flex;
       align-items: center;
-      position: relative;
-      overflow: hidden;
-      padding: 80px 0 40px;
-    }
-
-    .hero-back-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 22vw;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      color: rgba(230, 240, 255, 0.5);
-      white-space: nowrap;
-      user-select: none;
-      z-index: 0;
-      pointer-events: none;
-      font-family: 'Poppins', sans-serif;
-      line-height: 1;
-      text-shadow: 0 10px 20px rgba(0,0,0,0.02);
+      background: radial-gradient(circle at 80% 30%, rgba(37,99,235,0.03) 0%, transparent 50%);
     }
 
     .hero-content {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-      position: relative;
-      z-index: 5;
-      width: 100%;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 750px;
     }
 
-    /* 3D character illustration (pure CSS, friendly cartoon style) */
-    .character-3d {
-      flex: 1 1 300px;
-      min-width: 280px;
-      display: flex;
-      justify-content: center;
-      filter: drop-shadow(0 20px 25px -8px rgba(0,0,0,0.2));
-      transform-style: preserve-3d;
-    }
-
-    .character {
-      position: relative;
-      width: 280px;
-      height: 300px;
-      transform: perspective(600px) rotateY(3deg) rotateX(1.5deg);
-      transition: transform 0.3s;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    /* --- character parts --- */
-    .head {
-      position: absolute;
-      top: 0;
-      left: 70px;
-      width: 140px;
-      height: 140px;
-      background: #FFE1C4;  /* skin */
-      border-radius: 50%;
-      box-shadow: 0 12px 0 #D4B99B, 0 20px 20px rgba(0, 0, 0, 0.1);
-      z-index: 3;
-      overflow: hidden;
-    }
-
-    .eye-left, .eye-right {
-      position: absolute;
-      width: 26px;
-      height: 30px;
-      background: white;
-      border-radius: 50%;
-      top: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 4px rgba(0,0,0,0.05);
-    }
-    .eye-left { left: 28px; }
-    .eye-right { right: 28px; }
-
-    .pupil {
-      width: 12px;
-      height: 16px;
-      background: #1e2b3a;
-      border-radius: 50%;
-      transition: 0.2s;
-    }
-    .eye-left:hover .pupil, .eye-right:hover .pupil {
-      transform: scale(1.2);
-      background: #2b3b4e;
-    }
-
-    .mouth {
-      position: absolute;
-      width: 40px;
-      height: 20px;
-      background: transparent;
-      border-bottom: 5px solid #BF6F6F;
-      border-radius: 0 0 20px 20px;
-      bottom: 30px;
-      left: 50px;
-    }
-
-    /* hoodie / body */
-    .hoodie {
-      position: absolute;
-      top: 100px;
-      left: 50px;
-      width: 180px;
-      height: 150px;
-      background: #6C5B7B;
-      border-radius: 60px 60px 30px 30px;
-      box-shadow: 0 12px 0 #4e3f5e, 0 20px 15px rgba(0,0,0,0.1);
-      z-index: 2;
-    }
-
-    .hoodie-pocket {
-      position: absolute;
-      width: 100px;
-      height: 45px;
-      background: #8a7a9c;
-      bottom: 25px;
-      left: 40px;
-      border-radius: 30px;
-      opacity: 0.7;
-    }
-
-    .arm-left, .arm-right {
-      position: absolute;
-      width: 45px;
-      height: 110px;
-      background: #6C5B7B;
-      top: 115px;
-      border-radius: 30px;
-      box-shadow: 0 10px 0 #4e3f5e;
-      z-index: 1;
-    }
-    .arm-left { left: 15px; transform: rotate(-15deg); }
-    .arm-right { right: 15px; transform: rotate(15deg); }
-
-    /* 3D hint extra */
-    .character::after {
-      content: '';
-      position: absolute;
-      bottom: -20px;
-      left: 40px;
-      width: 200px;
-      height: 30px;
-      background: radial-gradient(rgba(0,0,0,0.1) 10%, transparent 70%);
-      border-radius: 50%;
-      filter: blur(10px);
-      z-index: 0;
-    }
-
-    .hero-text {
-      flex: 1 1 400px;
-      z-index: 5;
-    }
-
-    .hero-text .badge {
-      background: rgba(108, 91, 123, 0.15);
-      backdrop-filter: blur(4px);
-      padding: 8px 20px;
-      border-radius: 40px;
-      display: inline-block;
-      font-weight: 500;
-      color: #4e3f5e;
-      margin-bottom: 24px;
-      font-size: 1rem;
-      border: 1px solid rgba(255,255,255,0.5);
-    }
-
-    .hero-text h1 {
-      font-size: clamp(3rem, 8vw, 5rem);
-      font-weight: 800;
+    .hero h1 {
+      font-size: 4rem;
       line-height: 1.1;
-      letter-spacing: -0.03em;
-      color: #0b1a2b;
-      margin-bottom: 16px;
-    }
-
-    .hero-text h1 span {
-      background: linear-gradient(145deg, #6C5B7B, #457B9D);
-      --webkit-background-clip: text;
+      background: linear-gradient(to right, #0f172a, #2563eb);
+      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-subtitle {
-      font-size: 1.8rem;
-      font-weight: 400;
-      color: #475569;
-      border-left: 6px solid #6C5B7B;
-      padding-left: 24px;
-      margin-top: 16px;
+    .hero p {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 38px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      background: var(--surface);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: none;
+      box-shadow: 0 15px 25px -8px rgba(37,99,235,0.4);
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-4px);
+      box-shadow: 0 25px 30px -8px rgba(37,99,235,0.5);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-light);
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     /* ---------- ABOUT ---------- */
     .about-grid {
       display: flex;
-      gap: 50px;
+      gap: 4rem;
       align-items: center;
       flex-wrap: wrap;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(8px);
-      border-radius: 48px;
-      padding: 48px 40px;
-      box-shadow: 0 25px 45px -20px rgba(0,0,0,0.15);
-      border: 1px solid rgba(255,255,255,0.6);
     }
 
-    .profile-img {
-      width: 180px;
-      height: 180px;
-      background: linear-gradient(135deg, #b8b0d0, #d6e2f0);
+    .about-img {
+      flex: 1 1 280px;
+      text-align: center;
+    }
+
+    .about-img img {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      box-shadow: 0 30px 30px -15px rgba(60, 50, 80, 0.25);
+      box-shadow: var(--shadow-md);
       border: 5px solid white;
-      transition: 0.2s;
-    }
-    .profile-img i {
-      color: #4a3f5a;
-      text-shadow: 2px 4px 6px rgba(0,0,0,0.05);
+      transition: var(--transition);
     }
 
-    .about-desc {
-      flex: 1;
+    .about-img img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 30px 40px -15px var(--accent);
+    }
+
+    .about-text {
+      flex: 2 1 400px;
+    }
+
+    .about-text p {
       font-size: 1.2rem;
-      color: #1e2a3a;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
     }
 
-    /* ---------- SKILLS ---------- */
+    /* ---------- SKILLS (progress + icons) ---------- */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-      margin-top: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
     }
 
     .skill-item {
-      background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(8px);
-      padding: 24px 18px;
-      border-radius: 28px;
-      box-shadow: 0 12px 24px -16px rgba(0,0,0,0.15);
+      background: var(--surface);
+      padding: 1.5rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
       border: 1px solid rgba(255,255,255,0.5);
-      transition: all 0.25s;
-    }
-    .skill-item:hover {
-      background: white;
-    }
-
-    .skill-icon {
-      font-size: 2.2rem;
-      color: #6C5B7B;
-      margin-bottom: 16px;
-    }
-
-    .skill-name {
-      font-weight: 600;
-      margin-bottom: 16px;
-      font-size: 1.2rem;
-    }
-
-    .progress-bar-bg {
-      background: #e7eef8;
-      height: 10px;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 10px;
-      background: linear-gradient(90deg, #6C5B7B, #88b7d3);
-      border-radius: 20px;
-      width: 0%;
-      transition: width 1s ease 0.3s;
-      box-shadow: 0 0 8px #a0b9d1;
-    }
-
-    /* ---------- EXPERIENCE (vertical timeline) ---------- */
-    .timeline {
-      position: relative;
-      padding-left: 40px;
-      margin: 40px 0;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 12px;
-      top: 16px;
-      bottom: 16px;
-      width: 3px;
-      background: linear-gradient(180deg, #cbd5e1, #94a3b8, #cbd5e1);
-      border-radius: 3px;
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-bottom: 48px;
-      display: flex;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: -40px;
-      top: 6px;
-      width: 26px;
-      height: 26px;
-      background: white;
-      border: 4px solid #6C5B7B;
-      border-radius: 50%;
-      box-shadow: 0 8px 14px -6px #1e2b3a33;
-      transition: 0.2s;
-    }
-    .timeline-item:hover .timeline-dot {
-      background: #6C5B7B;
-      border-color: #9f8db5;
-      transform: scale(1.2);
-    }
-
-    .timeline-date {
-      min-width: 130px;
-      font-weight: 600;
-      color: #4b3b5c;
-      background: rgba(230, 240, 255, 0.5);
-      padding: 8px 16px;
-      border-radius: 40px;
-      height: fit-content;
       backdrop-filter: blur(4px);
     }
 
-    .timeline-content {
-      flex: 1;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(8px);
-      padding: 24px 28px;
-      border-radius: 28px;
-      box-shadow: 0 10px 20px -10px rgba(0,0,0,0.08);
-      border: 1px solid rgba(255,255,255,0.8);
+    .skill-item:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-md);
     }
 
-    .timeline-content h3 {
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    /* ---------- CONTACT ---------- */
-    .contact-flex {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(8px);
-      border-radius: 50px;
-      padding: 48px 44px;
-      border: 1px solid #fffffffa;
-    }
-
-    .contact-info {
-      flex: 1 1 260px;
-    }
-
-    .contact-item {
+    .skill-header {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 28px;
+      gap: 12px;
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .skill-header i {
+      font-size: 2rem;
+      color: var(--accent);
+      width: 40px;
+    }
+
+    .progress-bar-bg {
+      background: #e9eef3;
+      height: 12px;
+      border-radius: 30px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, var(--accent), #7c9cf0);
+      height: 100%;
+      width: 0%;
+      border-radius: 30px;
+      color: white;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 6px;
+      transition: width 1.2s ease-out;
+    }
+
+    /* static demo widths (set inline) */
+    /* ---------- PROJECTS ---------- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    .project-card:hover {
+      transform: scale(1.02) translateY(-8px);
+      box-shadow: 0 30px 40px -20px rgba(37,99,235,0.3);
+    }
+
+    .project-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .project-content {
+      padding: 1.8rem;
+    }
+
+    .project-content h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-content p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .project-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid transparent;
+      transition: var(--transition);
+    }
+
+    .project-links a:hover {
+      border-bottom-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    /* ---------- EDUCATION TIMELINE ---------- */
+    .timeline {
+      margin-top: 3rem;
+      position: relative;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      background: var(--surface);
+      padding: 1.8rem 2rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border-left: 5px solid var(--accent);
+    }
+
+    .timeline-item:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateX(8px);
+    }
+
+    .timeline-date {
+      min-width: 140px;
+      font-weight: 700;
+      color: var(--accent);
       font-size: 1.2rem;
     }
 
-    .contact-item i {
-      width: 48px;
-      height: 48px;
-      background: white;
-      border-radius: 50%;
+    .timeline-content h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-content p {
+      color: var(--text-secondary);
+    }
+
+    /* ---------- CONTACT & SOCIALS ---------- */
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      background: var(--surface);
+      padding: 3rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .contact-form {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #6C5B7B;
-      font-size: 1.5rem;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.03);
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 16px 20px;
+      border: 1px solid var(--border-light);
+      border-radius: 40px;
+      font-family: inherit;
+      font-size: 1rem;
+      background: rgba(248,250,252,0.7);
+      transition: var(--transition);
+    }
+
+    .form-group textarea {
+      border-radius: 30px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
+      background: white;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .social-links {
       display: flex;
-      gap: 22px;
-      margin-top: 20px;
+      gap: 2rem;
+      margin-top: 2rem;
     }
 
     .social-links a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 56px;
-      height: 56px;
-      background: white;
-      border-radius: 50%;
-      color: #2d3c4f;
-      font-size: 1.8rem;
-      transition: all 0.2s;
-      box-shadow: 0 8px 14px rgba(0,0,0,0.02);
+      color: var(--text-secondary);
+      font-size: 2rem;
+      transition: var(--transition);
     }
 
     .social-links a:hover {
-      background: #6C5B7B;
-      color: white;
+      color: var(--accent);
       transform: translateY(-6px);
     }
 
-    /* responsive */
-    @media (max-width: 700px) {
-      .hero-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hero-text .badge {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .hero-subtitle {
-        border-left: none;
-        border-top: 4px solid #6C5B7B;
-        padding-top: 16px;
-      }
-      .timeline {
-        padding-left: 30px;
-      }
-      .about-grid {
-        padding: 30px 20px;
-        flex-direction: column;
-        text-align: center;
-      }
-      .section-title:after {
-        left: 50%;
-        transform: translateX(-50%);
-      }
+    .contact-details p {
+      margin: 1rem 0;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    /* footer */
-    .footer-note {
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: white;
+      padding: 30px 0;
       text-align: center;
-      padding: 40px 0 20px;
-      color: #5f6c80;
-      font-size: 0.9rem;
+      border-top: 1px solid var(--border-light);
+      color: var(--text-secondary);
+      font-weight: 300;
     }
 
-    i, .fas, .fab { pointer-events: none; }
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      h2 { font-size: 2.2rem; }
+      .hero h1 { font-size: 3.2rem; }
+      .contact-container { grid-template-columns: 1fr; }
+      .timeline-item { flex-direction: column; gap: 0.5rem; }
+    }
+
+    @media (max-width: 700px) {
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        gap: 1.5rem;
+        box-shadow: 0 30px 40px rgba(0,0,0,0.1);
+        transform: translateY(-150%);
+        transition: transform 0.4s ease;
+        border-bottom: 1px solid var(--border-light);
+        z-index: 999;
+      }
+      .nav-links.active {
+        transform: translateY(0);
+      }
+      .hamburger {
+        display: block;
+      }
+      .hero h1 { font-size: 2.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 70px 0; }
+      .hero h1 { font-size: 2.2rem; }
+      .btn { padding: 12px 24px; }
+      .about-grid { gap: 2rem; }
+    }
   </style>
 </head>
 <body>
+  <!-- STICKY NAVBAR (glass) -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <span class="logo">emily.j</span>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+    </div>
+  </nav>
 
-<!-- HERO SECTION -->
-<section class="hero">
-  <div class="hero-back-text">PORTFOLIO</div>
-  <div class="container hero-content">
-    <!-- 3D character illustration -->
-    <div class="character-3d">
-      <div class="character">
-        <div class="head">
-          <div class="eye-left"><div class="pupil"></div></div>
-          <div class="eye-right"><div class="pupil"></div></div>
-          <div class="mouth"></div>
+  <!-- HERO section -->
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <h1>Crafting digital<br>experiences with code</h1>
+      <p>Hi, I'm Emily — frontend student & UI explorer. I turn ideas into interactive, beautiful web interfaces.</p>
+      <div class="cta-buttons">
+        <a href="#projects" class="btn btn-primary"><i class="fas fa-arrow-down"></i> View projects</a>
+        <a href="#contact" class="btn btn-outline">Let's talk</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT section -->
+  <section id="about" class="section-hidden">
+    <div class="container">
+      <h2>About me</h2>
+      <div class="about-grid">
+        <div class="about-img">
+          <!-- ui-avatar initials image (clean) -->
+          <img src="student.jpeg" alt="Emily profile">
         </div>
-        <div class="hoodie">
-          <div class="hoodie-pocket"></div>
+        <div class="about-text">
+          <p>I'm a second-year computer science student with a love for frontend development and interaction design. I believe great design is not just how it looks, but how it works. My toolbox includes modern HTML/CSS, JavaScript, and React, and I'm constantly exploring new UI patterns.</p>
+          <p>Outside of coding, I sketch wireframes, contribute to open source, and enjoy reading about human-centered design. Currently looking for an internship where I can grow and build meaningful products.</p>
         </div>
-        <div class="arm-left"></div>
-        <div class="arm-right"></div>
       </div>
     </div>
-    <!-- intro text -->
-    <div class="hero-text fade-up">
-      <div class="badge"><i class="fas fa-star" style="margin-right: 8px;"></i> student portfolio</div>
-      <h1>creativity <span>& design</span></h1>
-      <div class="hero-subtitle">Senior Designer (in training)</div>
-      <p style="margin-top: 30px; max-width: 500px; color: #334155; font-size: 1.2rem;">Crafting digital stories with bold typography and a human touch.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT -->
-<section class="container" style="margin-bottom: 100px;">
-  <div class="about-grid fade-up">
-    <div class="profile-img">
-      <i class="fas fa-user-astronaut"></i>
-    </div>
-    <div class="about-desc">
-      <h2 class="section-title" style="margin-top: 0;">about me</h2>
-      <p style="font-size: 1.25rem; font-weight: 350;">I’m a design student obsessed with clean interfaces, playful 3D illustrations, and minimal layouts. Currently exploring the intersection of typography and interaction. Based in Brooklyn — drinking coffee and sketching ideas.</p>
-      <p style="margin-top: 18px;"><i class="fas fa-map-pin" style="color:#6C5B7B;"></i> NY, USA</p>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section class="container" style="margin-bottom: 100px;">
-  <h2 class="section-title fade-up">skills & tools</h2>
-  <div class="skills-grid">
-    <div class="skill-item fade-up">
-      <div class="skill-icon"><i class="fab fa-figma"></i></div>
-      <div class="skill-name">Figma</div>
-      <div class="progress-bar-bg"><div class="progress-fill" data-width="90" style="width: 0%;"></div></div>
-    </div>
-    <div class="skill-item fade-up">
-      <div class="skill-icon"><i class="fas fa-paint-brush"></i></div>
-      <div class="skill-name">Illustrator</div>
-      <div class="progress-bar-bg"><div class="progress-fill" data-width="78" style="width: 0%;"></div></div>
-    </div>
-    <div class="skill-item fade-up">
-      <div class="skill-icon"><i class="fas fa-code"></i></div>
-      <div class="skill-name">HTML/CSS</div>
-      <div class="progress-bar-bg"><div class="progress-fill" data-width="88" style="width: 0%;"></div></div>
-    </div>
-    <div class="skill-item fade-up">
-      <div class="skill-icon"><i class="fas fa-cube"></i></div>
-      <div class="skill-name">Blender</div>
-      <div class="progress-bar-bg"><div class="progress-fill" data-width="65" style="width: 0%;"></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE (vertical timeline) -->
-<section class="container" style="margin-bottom: 100px;">
-  <h2 class="section-title fade-up">experience</h2>
-  <div class="timeline">
-    <div class="timeline-item fade-up">
-      <span class="timeline-dot"></span>
-      <div class="timeline-date">2024 — present</div>
-      <div class="timeline-content card-soft">
-        <h3>Junior Designer · studio m</h3>
-        <p style="color: #2d3c50;">Collaborating on brand identities, motion tests, and 3D design explorations. Worked with 5+ startup clients.</p>
+  <!-- SKILLS section with progress bars -->
+  <section id="skills" class="section-hidden">
+    <div class="container">
+      <h2>Skills & tools</h2>
+      <div class="skills-grid">
+        <!-- skill 1 -->
+        <div class="skill-item">
+          <div class="skill-header"><i class="fab fa-html5"></i> HTML5</div>
+          <div class="progress-bar-bg"><div class="progress-fill" style="width:95%">95%</div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><i class="fab fa-css3-alt"></i> CSS3 / SCSS</div>
+          <div class="progress-bar-bg"><div class="progress-fill" style="width:92%">92%</div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><i class="fab fa-js"></i> JavaScript (ES6+)</div>
+          <div class="progress-bar-bg"><div class="progress-fill" style="width:88%">88%</div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><i class="fab fa-react"></i> React</div>
+          <div class="progress-bar-bg"><div class="progress-fill" style="width:78%">78%</div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><i class="fab fa-figma"></i> Figma</div>
+          <div class="progress-bar-bg"><div class="progress-fill" style="width:85%">85%</div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><i class="fas fa-code-branch"></i> Git & GitHub</div>
+          <div class="progress-bar-bg"><div class="progress-fill" style="width:90%">90%</div></div>
+        </div>
       </div>
     </div>
-    <div class="timeline-item fade-up">
-      <span class="timeline-dot"></span>
-      <div class="timeline-date">2023 — 2024</div>
-      <div class="timeline-content card-soft">
-        <h3>Design intern · creative lab</h3>
-        <p>Assisted in UI/UX for a student platform, created social media assets and learned the ropes of professional design.</p>
+  </section>
+
+  <!-- PROJECTS section with cards -->
+  <section id="projects" class="section-hidden">
+    <div class="container">
+      <h2>Featured projects</h2>
+      <div class="projects-grid">
+        <!-- card 1 -->
+        <div class="project-card">
+          <img class="project-img" src="https://picsum.photos/id/26/400/250" alt="project snapshot">
+          <div class="project-content">
+            <h3>TaskFlow</h3>
+            <p>Minimalist productivity board with drag‑and‑drop, built with React and local storage.</p>
+            <div class="project-links">
+              <a href="https://github.com/ArpitTech-756/arpit-portfolio/blob/main/index2.html"><i class="fab fa-github"></i> code</a>
+              <a href="linking.html"><i class="fas fa-external-link-alt"></i> live demo</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <img class="project-img" src="https://picsum.photos/id/13/400/250" alt="project snapshot">
+          <div class="project-content">
+            <h3>WeatherPulse</h3>
+            <p>Clean weather app with animated icons and 5‑day forecast using OpenWeather API.</p>
+            <div class="project-links">
+              <a href="https://github.com/ArpitTech-756/arpit-portfolio/blob/main/index2.html"><i class="fab fa-github"></i> code</a>
+              <a href="linking.html"><i class="fas fa-external-link-alt"></i> live demo</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <img class="project-img" src="https://picsum.photos/id/42/400/250" alt="project snapshot">
+          <div class="project-content">
+            <h3>Portfolio v2</h3>
+            <p>This very site — built with glassmorphism, smooth scroll and responsive grids.</p>
+            <div class="project-links">
+              <a href="https://github.com/ArpitTech-756/arpit-portfolio/blob/main/index2.html"><i class="fab fa-github"></i> code</a>
+              <a href="linking.html"><i class="fas fa-external-link-alt"></i> live demo</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="timeline-item fade-up">
-      <span class="timeline-dot"></span>
-      <div class="timeline-date">2022 — 2023</div>
-      <div class="timeline-content card-soft">
-        <h3>Freelance illustrator</h3>
-        <p>Self-initiated projects, small commissions, and built a small portfolio of character designs and posters.</p>
+  </section>
+
+  <!-- EDUCATION timeline -->
+  <section id="education" class="section-hidden">
+    <div class="container">
+      <h2>Education journey</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2023 – present</div>
+          <div class="timeline-content">
+            <h3>BSc Computer Science · University of Technologia</h3>
+            <p>Relevant coursework: Web dev, Algorithms, UI/UX, Databases. Current GPA: 3.9/4.0</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2021 – 2023</div>
+          <div class="timeline-content">
+            <h3>High school · STEM pathway</h3>
+            <p>Graduated with distinction. Led coding club and built first web projects.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2024 · summer</div>
+          <div class="timeline-content">
+            <h3>Frontend intensive · Codecademy / Meta course</h3>
+            <p>Completed advanced React, state management, and modern CSS architectures.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section class="container" style="margin-bottom: 80px;">
-  <h2 class="section-title fade-up">let's connect</h2>
-  <div class="contact-flex fade-up">
-    <div class="contact-info">
-      <div class="contact-item"><i class="fas fa-envelope"></i> alex.studio@design.edu</div>
-      <div class="contact-item"><i class="fas fa-phone-alt"></i> +1 (212) 555 0987</div>
-      <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Brooklyn, NY</div>
-    </div>
-    <div style="flex: 1;">
-      <p style="font-size: 1.2rem; margin-bottom: 24px;">find me elsewhere —</p>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-behance"></i></a>
-        <a href="#"><i class="fab fa-dribbble"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
+  <!-- CONTACT form + socials -->
+  <section id="contact" class="section-hidden">
+    <div class="container">
+      <h2>Let's connect</h2>
+      <div class="contact-container">
+        <div class="contact-form">
+          <div class="form-group">
+            <input type="text" placeholder="Your name" id="name">
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email address" id="email">
+          </div>
+          <div class="form-group">
+            <textarea rows="5" placeholder="Tell me about your project..."></textarea>
+          </div>
+          <button class="btn btn-primary" style="align-self:flex-start;">Send message <i class="fas fa-paper-plane"></i></button>
+        </div>
+        <div class="contact-info">
+          <div class="contact-details">
+            <p><i class="fas fa-envelope" style="color:var(--accent);"></i> emily.j@student.dev</p>
+            <p><i class="fas fa-map-pin"></i> San Francisco / remote</p>
+          </div>
+          <div class="social-links">
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Codepen"><i class="fab fa-codepen"></i></a>
+          </div>
+        </div>
       </div>
-      <p style="margin-top: 40px; font-style: italic; color: #55657a;">"design with curiosity"</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer class="footer-note">
-  <span>© 2026 student portfolio — clean & modern</span>
-</footer>
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Emily Johnson · crafted with ☕ and code</p>
+    </div>
+  </footer>
 
-<!-- JavaScript: fade-up + progress fill -->
-<script>
-  (function() {
-    // Fade-up on scroll (Intersection Observer)
-    const faders = document.querySelectorAll('.fade-up');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          // if it's a skill item, animate progress bars inside
-          if (entry.target.querySelector('.progress-fill')) {
-            const fills = entry.target.querySelectorAll('.progress-fill');
-            fills.forEach(fill => {
-              const width = fill.getAttribute('data-width');
-              if (width) fill.style.width = width + '%';
-            });
+  <!-- JAVASCRIPT: mobile menu + scroll reveal -->
+  <script>
+    (function() {
+      // ---------- mobile hamburger ----------
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+
+      if (hamburger) {
+        hamburger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          navLinks.classList.toggle('active');
+        });
+      }
+
+      // close mobile menu after clicking a link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+        });
+      });
+
+      // ---------- Intersection Observer (scroll fade) ----------
+      const sections = document.querySelectorAll('section:not(#home)'); // home visible by default
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('section-visible');
           }
-          // for skill grid container (bulk) we need to target each skill-item individually, already done
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+
+      sections.forEach(section => {
+        section.classList.add('section-hidden');  // initially hidden
+        observer.observe(section);
+      });
+
+      // home already visible, but we want no fade on home, just remove hidden if any
+      document.getElementById('home').classList.remove('section-hidden');
+
+      // minor: hover effect for skill progress is already inline, but we ensure progress visible.
+      // for extra polish: progress fill is set static.
+
+      // close menu on window resize (if open)
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 700) {
+          navLinks.classList.remove('active');
         }
       });
-    }, { threshold: 0.2, rootMargin: '0px 0px -10px 0px' });
+    })();
+  </script>
 
-    faders.forEach(f => observer.observe(f));
-
-    // also for timeline items & any .progress-fill that might be inside a container that gets revealed
-    // but the progress fill is set to 0% initially; when its parent .skill-item gets revealed we set width.
-    // however if the whole skills-grid appears but items are observed individually, it's fine.
-
-    // additionally, in case any progress bar is inside already revealed, we need to set manually (but all start hidden)
-    // Also when the page loads, check for elements already visible
-    window.addEventListener('load', () => {
-      faders.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          el.classList.add('revealed');
-          const fills = el.querySelectorAll('.progress-fill');
-          fills.forEach(fill => {
-            const width = fill.getAttribute('data-width');
-            if (width) fill.style.width = width + '%';
-          });
-        }
-      });
-    });
-
-    // hover effect for 3D character (playful)
-    const character = document.querySelector('.character');
-    if(character) {
-      character.addEventListener('mouseenter', () => {
-        character.style.transform = 'perspective(600px) rotateY(6deg) rotateX(3deg) scale(1.02)';
-      });
-      character.addEventListener('mouseleave', () => {
-        character.style.transform = 'perspective(600px) rotateY(3deg) rotateX(1.5deg)';
-      });
-    }
-  })();
-</script>
-
-<!-- ensure progress fills on reveal from any container (due to nested structure, works fine) -->
+  <!-- ensure any missing section-hidden from home is removed, and extra style for timeline hover etc. -->
+  <style>
+    /* extra micro-interactions */
+    .project-card .project-links a i { transition: transform 0.2s; }
+    .project-card .project-links a:hover i { transform: translateX(4px); }
+    .btn-outline { background: transparent; border: 1px solid var(--border-light); }
+    .btn-outline:hover { background: white; }
+    .timeline-date i { margin-right: 8px; }
+    footer p { opacity: 0.7; }
+  </style>
 </body>
 </html>
